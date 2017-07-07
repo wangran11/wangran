@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+</head>
+<body>
+	<ul id="ul1"></ul>
+	<script type="text/javascript">
+		var ajax = new XMLHttpRequest();
+		ajax.open("get","data/data.php?type=list");
+		ajax.onreadystatechange = function(){
+			if (ajax.readyState==4) {
+				var obj = JSON.parse(ajax.responseText);
+				var All = obj.records;
+				console.log(obj)
+				var  ul = document.getElementById('ul1');
+				for (var i = 0; i < All.length; i++) {
+					var li = document.createElement('li');
+					li.innerHTML = "<p>"+"姓名："+All[i].Name+"</p>"+"<p>"+"城市："+All[i].City+"</p>"+"<p>"+"年龄："+All[i].age+"</p>"+"<p>"+"国家："+All[i].Country+"</p>";
+					ul.appendChild(li);
+
+				}
+			}
+		}
+		ajax.send(null);
+	</script>
+</body>
+</html>
